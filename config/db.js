@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 // ---------------------------------------------------------------------------
 // CONFIG — conexión a MongoDB.
@@ -10,9 +10,9 @@ import mongoose from 'mongoose'
 //    apunta a una base local. Nadie debe poder entrar a tu base desde tu repo.
 
 const MONGODB_URI =
-  'mongodb+srv://usuario-mongo:clave-secreta@cluster0.xxxxx.mongodb.net/plataforma'
+  "mongodb+srv://franciscosanjuanr98_db_user:KYpnNfGDXZXKRnyn@cluster0.eqgfgbm.mongodb.net/ipss";
 
 export const conectar = async () => {
-  await mongoose.connect(MONGODB_URI)
-  console.log(`🍃 conectado a MongoDB → base "${mongoose.connection.name}"`)
-}
+  await mongoose.connect(MONGODB_URI);
+  console.log(`🍃 conectado a MongoDB → base "${mongoose.connection.name}"`);
+};

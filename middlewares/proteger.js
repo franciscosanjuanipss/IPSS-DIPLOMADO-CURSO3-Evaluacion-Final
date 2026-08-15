@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from '../config/jwt.js'
+import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../config/jwt.js";
 
 // ---------------------------------------------------------------------------
 // MIDDLEWARE — el guardia de las rutas protegidas.
@@ -15,8 +15,22 @@ import { JWT_SECRET } from '../config/jwt.js'
 //   5. Si verify lanza (token alterado/expirado), responde 401.
 //   6. Si todo bien, next().
 export const proteger = (req, res, next) => {
-  // ...
-}
+  const header = req.headers.authorization;
+
+  if (!header || !header.startWith("Bearer")) {
+    return res.status(401).json({ error: "Falta el token" });
+  }
+
+  const token = header.split(" ")[1];
+
+  try {
+    const payload = jwt.verify(token, JWT_SECRET);
+    req.medico = payload;
+    next();
+  } catch {
+    return res.status(401).json({ error: "Token inválido o expirado" });
+  }
+};
 
 // ---------------------------------------------------------------------------
 // MIDDLEWARE — autorización por rol. Se usa DESPUÉS de proteger.
@@ -27,4 +41,4 @@ export const proteger = (req, res, next) => {
 //   Si no coincide, responde 403.
 export const soloRol = (rol) => (req, res, next) => {
   // ...
-}
+};
