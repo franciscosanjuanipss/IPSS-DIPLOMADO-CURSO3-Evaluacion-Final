@@ -10,27 +10,24 @@ import { proteger, soloRol } from "../middlewares/proteger.js";
 export const cursoRoutes = Router();
 
 // TODO: conecta cada ruta. Ejemplos de la forma (ver enunciado para el detalle):
-//
+cursoRoutes.use(proteger)
 //  ── Profesor ──
-cursoRoutes.get("/", proteger, soloRol("profesor"), controller.listar);
-cursoRoutes.post("/", proteger, soloRol("profesor"), controller.crear);
+cursoRoutes.get("/", soloRol("profesor"), controller.listar);
+cursoRoutes.post("/", soloRol("profesor"), controller.crear);
 cursoRoutes.get(
   "/mis-cursos",
-  proteger,
   soloRol("profesor"),
   controller.misCursos,
 );
-cursoRoutes.put("/:id", proteger, soloRol("profesor"), controller.editar);
-cursoRoutes.delete("/:id", proteger, soloRol("profesor"), controller.borrar);
+cursoRoutes.put("/:id", soloRol("profesor"), controller.editar);
+cursoRoutes.delete("/:id", soloRol("profesor"), controller.borrar);
 cursoRoutes.post(
   "/asignarme/:id",
-  proteger,
   soloRol("profesor"),
   controller.asignarme,
 );
 cursoRoutes.get(
   "/alumnos/:id",
-  proteger,
   soloRol("profesor"),
   controller.alumnosDelCurso,
 );
@@ -38,19 +35,16 @@ cursoRoutes.get(
 //  ── Alumno ──
 cursoRoutes.get(
   "/mis-matriculas",
-  proteger,
   soloRol("alumno"),
   controller.misMatriculas,
 );
 cursoRoutes.post(
   "/matricularme/:id",
-  proteger,
   soloRol("alumno"),
   controller.matricularme,
 );
 cursoRoutes.delete(
   "/matricularme/:id",
-  proteger,
   soloRol("alumno"),
   controller.desmatricularme,
 );

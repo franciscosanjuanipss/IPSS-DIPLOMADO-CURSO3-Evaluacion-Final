@@ -19,14 +19,14 @@ export const firmarToken = (id, rol) =>
 //   - devuelve { token, profesor } (sin la password)
 export const registrarProfesor = async (datos) => {
   const profesor = await Profesor.create(datos);
-  const token = firmarToken(profesor);
+  const token = firmarToken(profesor._id, "profesor");
   return { profesor, token };
 };
 
 // TODO: registra un alumno (igual que el profesor).
 export const registrarAlumno = async (datos) => {
   const alumno = await Alumno.create(datos);
-  const token = firmarToken(alumno);
+  const token = firmarToken(alumno._id, "alumno");
   return { alumno, token };
 };
 
@@ -43,14 +43,14 @@ export const login = async (email, password) => {
   if (profesor) {
     const coincide = await profesor.compararPassword(password);
     if (!coincide) return null;
-    const token = firmarToken(profesor);
+    const token = firmarToken(profesor._id, "profesor");
     return { profesor, token };
   }
 
   if (alumno) {
     const coincide = await alumno.compararPassword(password);
     if (!coincide) return null;
-    const token = firmarToken(alumno);
+    const token = firmarToken(alumno._id, "alumno");
     return { alumno, token };
   }
 };

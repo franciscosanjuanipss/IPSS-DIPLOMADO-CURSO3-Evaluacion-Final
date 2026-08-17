@@ -29,17 +29,14 @@ export const registrarAlumno = async (req, res) => {
 // POST /api/auth/login
 export const login = async (req, res) => {
   try {
-    // TODO:
-    //   1. Recibe email y password del body.
-    //   2. Busca al usuario (¿profesor o alumno? decide cómo lo resuelves).
-    //   3. Compara la password con bcrypt.
-    //   4. Si no coincide → 401.
-    //   5. Si coincide → firma un token que incluya el id y el ROL, y devuélvelo.
+
     const { email, password } = req.body;
     const resultado = await service.login(email, password);
+
     if (!resultado) {
       return res.status(401).json({ error: "Credenciales inválidas" });
     }
+    
     res.status(200).json(resultado);
   } catch (error) {
     res.status(400).json({ error: error.message });

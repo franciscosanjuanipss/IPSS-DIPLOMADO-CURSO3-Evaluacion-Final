@@ -15,17 +15,21 @@ import { JWT_SECRET } from "../config/jwt.js";
 //   5. Si verify lanza (token alterado/expirado), responde 401.
 //   6. Si todo bien, next().
 export const proteger = (req, res, next) => {
+  // El token viaja en el header: "Authorization: Bearer <token>".
   const header = req.headers.authorization;
 
-  if (!header || !header.startWith("Bearer")) {
+  if (!header || !header.startsWith("Bearer")) {
     return res.status(401).json({ error: "Falta el token" });
   }
 
+  // Nos quedamos con la parte de después de "Bearer ".
   const token = header.split(" ")[1];
 
   try {
+    // verify comprueba la firma con el secreto. Si alguien lo alteró, lanza.
     const payload = jwt.verify(token, JWT_SECRET);
-    req.medico = payload;
+    // Guardamos quién es el médico autenticado para que el controller lo use.
+    req.usuario = payload;
     next();
   } catch {
     return res.status(401).json({ error: "Token inválido o expirado" });
@@ -40,5 +44,6 @@ export const proteger = (req, res, next) => {
 // TODO: devuelve un middleware que deje pasar solo si req.usuario.rol === rol.
 //   Si no coincide, responde 403.
 export const soloRol = (rol) => (req, res, next) => {
-  // ...
+  if(req.usuario.rol !== rol) res.status(403).json({error: "No tiene los permisos necesarios"})
+  next()
 };

@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+// Para el hash de la contraseña usaremos bcrypt:
+import bcrypt from "bcryptjs";
 
 // ---------------------------------------------------------------------------
 // MODELO — Alumno.
@@ -38,4 +40,4 @@ alumnoSchema.methods.toJSON = function () {
   return alumno;
 };
 
-export const Alumno = mongoose.model("Alumno", alumnoSchema, "alumnos");
+export const Alumno = mongoose.model("Alumno", alumnoSchema, "alumnos",);
