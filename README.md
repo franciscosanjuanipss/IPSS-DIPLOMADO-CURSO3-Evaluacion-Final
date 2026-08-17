@@ -3,22 +3,22 @@
 > **Diplomado IPS · Módulo 3** — Backend y APIs REST
 > Instituto Profesional San Sebastián
 
-Este es tu **punto de partida**. La estructura ya está armada; tú construyes la lógica.
+Este es un proyecto creado por Francisco San Juan
 
 ---
 
 ## 🚀 Cómo empezar
 
-Haz un **fork** para tener tu copia, clónala, e instala:
+Haz un clone e instala:
 
 ```bash
-git clone https://github.com/TU-USUARIO/IPSS-DIPLOMADO-CURSO3-Evaluacion-Final.git
+git clone https://github.com/franciscosanjuanipss/IPSS-DIPLOMADO-CURSO3-Evaluacion-Final.git
 cd IPSS-DIPLOMADO-CURSO3-Evaluacion-Final
 npm install
 ```
 
-**Configura tu MongoDB:** abre `config/db.js` y reemplaza `usuario-mongo` y `clave-secreta`
-por los de tu cluster de Atlas.
+**Configura tu MongoDB:** abre `config/db.js` y reemplaza `usuario-mongo` y `clave-secreta` por los de tu cluster de Atlas.
+Por problemas con mi dns tuve que crear una BD en un localhost pero de igual manera dejo la otra conexión
 
 Levanta el servidor:
 
@@ -54,35 +54,8 @@ Los archivos con **`// TODO:`** son los que tienes que completar. Los demás
 
 ---
 
-## 🗺️ El orden sugerido para resolverlo
-
-No intentes hacerlo todo de una. Un camino que funciona:
-
-1. **Los 3 modelos** (`models/`) — sin ellos, nada persiste.
-2. **El registro y login** (`auth.*`) — para poder obtener un token.
-3. **El middleware `proteger`** — para que las rutas protegidas dejen entrar.
-4. **El CRUD de cursos** — crear, listar (con `.populate()`), editar, borrar.
-5. **Las reglas de negocio** — asignarme, matricularme, y sus validaciones (el `409`).
-6. **El `soloRol`** — para separar lo que puede el profesor de lo que puede el alumno.
-
-Ve probando cada paso con Postman antes de seguir al siguiente.
-
----
-
-## 📋 Lo que se evalúa
-
-El enunciado completo (rutas, reglas de negocio, rúbrica y ponderación) está en el
-material de la evaluación. En resumen:
-
-- **Modelado y CRUD** — los 3 modelos, sus relaciones, y `.populate()`.
-- **Reglas de negocio** — matrícula según el estado del curso, asignación "primero que
-  llega", cada profesor ve solo sus cursos. **Es lo que más pesa.**
-- **Autenticación y roles** — JWT + bcrypt, y el rol que restringe el acceso.
-- **Códigos de estado** — el correcto en cada caso (200, 201, 400, 401, 403, 404, 409).
-- **Un video** demostrando el flujo y explicando tus decisiones.
-
-> ⚠️ Tu repositorio es **público**. No subas tu contraseña real de MongoDB: deja los
-> marcadores en `config/db.js`.
+Se agrega link del video
+Link: https://youtu.be/yOdH8Ydxl7A
 
 ---
 

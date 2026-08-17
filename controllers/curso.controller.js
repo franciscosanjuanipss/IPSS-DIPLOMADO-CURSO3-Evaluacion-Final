@@ -73,7 +73,7 @@ export const asignarme = async (req, res) => {
     //   3. Si está libre → asígnale req.usuario.id como profesor. Guarda.
     const curso = await service.buscarCurso(req.params.id)
     if (!curso) return res.status(404).json({ error: "Curso no encontrado" })
-    if (curso.profesor) return res.status(409).json({error: "Curso ya cuenta con profesor "+ curso.alumnos})
+    if (curso.profesor) return res.status(409).json({error: "Curso ya cuenta con profesor"})
     const profesor = {"profesor":req.usuario.id}
     const cursoN = await service.editarCurso(req.params.id, profesor)
     res.status(200).json(cursoN)
@@ -141,7 +141,7 @@ export const desmatricularme = async (req, res) => {
     const curso = await service.buscarCurso(req.params.id)
     if (!curso) return res.status(404).json({ error: "Curso no encontrado" })
     if (curso.estado === "CERRADO") return res.status(409).json({ error: "Curso se encuentra "+curso.estado })
-    const alumno = {"alumno":""}
+    const alumno = {"alumno":null}
     const cursoN = await service.editarCurso(req.params.id, alumno)
     res.status(200).json(cursoN)
   } catch (error) {
